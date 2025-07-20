@@ -1,0 +1,16 @@
+html
+<video id="video" autoplay></video>
+<button id="capture">Capture</button>
+<canvas id="canvas" hidden></canvas>
+<script>
+ const video = document.getElementById('video');
+ const canvas = document.getElementById('canvas');
+ const ctx = canvas.getContext('2d');
+ navigator.mediaDevices.getUserMedia({ video: true })
+ .then(stream => video.srcObject = stream);
+ document.getElementById('capture').addEventListener('click', () => {
+ ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+ const photo = canvas.toDataURL('image/jpeg');
+ // Send photo to server for email
+ });
+</script>

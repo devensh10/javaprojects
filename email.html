@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>EmailJS Example</title>
+</head>
+<body>
+
+  <h2>Send an Email</h2>
+  <form id="emailForm">
+    <label for="to_email">To Email:</label><br>
+    <input type="email" id="to_email" name="to_email" required><br><br>
+
+    <label for="message">Message:</label><br>
+    <textarea id="message" name="message" rows="4" cols="50" required></textarea><br><br>
+
+    <button type="submit">Send Email</button>
+  </form>
+
+  <!-- EmailJS SDK -->
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+
+  <script>
+    // Initialize EmailJS with your user ID
+    emailjs.init("U5mtcIp3EX_1cAJJx");
+
+    // Form submit handler
+    document.getElementById("emailForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      // Get form values
+      const toEmail = document.getElementById("to_email").value;
+      const message = document.getElementById("message").value;
+
+      // Send the email using EmailJS
+      emailjs.send("service_3rarik6", "template_1f32164", {
+        to_email: toEmail,
+        message: message
+      })
+      .then(function(response) {
+        alert("Email sent successfully!");
+        console.log("SUCCESS", response.status, response.text);
+      }, function(error) {
+        alert("Failed to send email.");
+        console.error("FAILED", error);
+      });
+    });
+  </script>
+
+</body>
+</html>
